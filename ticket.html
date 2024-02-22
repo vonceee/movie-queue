@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Ticket</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height:  100vh;
+            margin:  0;
+        }
+        .ticket {
+            width:  80%;
+            max-width:  600px;
+            background-color: #fff;
+            border-radius:  10px;
+            box-shadow:  0  4px  6px rgba(0,  0,  0,  0.1);
+            padding:  30px;
+            text-align: center;
+        }
+        .ticket h2 {
+            margin-top:  0;
+            color: #333;
+            font-size:  24px;
+        }
+        .ticket p {
+            margin-bottom:  10px;
+            color: #666;
+            font-size:  18px;
+        }
+        .ticket img {
+            width:  150px;
+            height:  150px;
+            object-fit: cover;
+            border-radius:  50%;
+            margin:  20px auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="ticket">
+    <h2>Your Movie Ticket</h2>
+    <p>Movie: Rewind</p>
+    <p>Showtime:  7:00 PM</p>
+    <p>Seat: Row  1, Seat  5</p>
+    <p>Price: $15.00</p>
+    <img src="qrcode.png" alt="QR Code">
+</div>
+
+</body>
+</html>

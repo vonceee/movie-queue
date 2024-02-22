@@ -58,7 +58,7 @@
                 array_push($errors, "Password does not match");
             }
             require_once "database.php";
-            $sql="SELECT * FROM tbl_online_account WHERE email='$email'";
+            $sql="SELECT * FROM user WHERE email='$email'";
             $result=mysqli_query($conn, $sql);
             $rowCount=mysqli_num_rows($result);
             if ($rowCount>0) {
@@ -71,7 +71,7 @@
                     }
                 } else {
                     require_once "database.php";
-                    $sql="INSERT INTO tbl_online_account(Last_Name, First_Name, email, password) values(?, ?, ?, ?)";
+                    $sql="INSERT INTO user(lname, fname, email, password) values(?, ?, ?, ?)";
                     $stmt=mysqli_stmt_init($conn); //initializes a statement and returns an object suitable for mysqli_stmt_prepare()
                     $preparestmt=mysqli_stmt_prepare($stmt, $sql);
                     if ($preparestmt) {
@@ -87,7 +87,7 @@
         ?>  
         <form action="registration.php" method="post">
             <div class="form-group">
-                <input type="text" class="form-control" name="LastName" placeholder="LastName">
+                <input type="text" class="form-control" name="LastName" placeholder="LastName"> 
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" name="FirstName" placeholder="FirstName">
@@ -110,3 +110,4 @@
 
 </body>
 </html>
+

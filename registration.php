@@ -13,10 +13,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="registration.css">
 </head>
 
 </body>
+
+    <!-- SM Navbar/Header -->
+    <nav class="navbar navbar-light bg-light">
+        <div id="logo">
+            <a class="navbar-brand" href="#">
+                <img src="https://www.smsupermalls.com/themes/revamp2022/assets/img/logo.svg" class="d-inline-block align-top" alt="">
+            </a>
+        </div>
+    </nav>
+    <!-- SM Navbar/Header -->
 
     <div class="container">
         <?php

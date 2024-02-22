@@ -12,9 +12,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- bootstrap navbar/header -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- bootstrap navbar/header -->
+
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
+    
+<!-- Image and text -->
+    <nav class="navbar navbar-light bg-light">
+        <div id="logo">
+            <a class="navbar-brand" href="#">
+                <img src="https://www.smsupermalls.com/themes/revamp2022/assets/img/logo.svg" class="d-inline-block align-top" alt="">
+            </a>
+        </div>
+    </nav>
+    <!-- Image and text -->
+
     <div class="container">
         <?php
 
@@ -50,6 +67,7 @@
                 <input type="password" name="password" class="form-control" required>
             </div>
             
+            <br>
             <div class="form-btn">
                 <input type="submit" value="Login" name="login" class="btn btn-primary">
             </div>

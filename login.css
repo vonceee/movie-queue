@@ -1,0 +1,12 @@
+body {
+	margin: 40px auto;
+	max-width: 650px;
+	line-height: 1.6;
+	font-size: 18px;
+	padding: 0 10px;
+}
+
+#logo a img {
+    max-height: 24px !important;
+    margin-top: 0 !important;
+}

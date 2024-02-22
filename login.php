@@ -15,7 +15,6 @@
     
     <!-- bootstrap navbar/header -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- bootstrap navbar/header -->
 
     <link rel="stylesheet" href="login.css">
@@ -58,18 +57,15 @@
 
         <form action="login.php" method="post">
             <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" name="email" class="form-control" required>
+                <input type="email" name="email" class="form-control" placeholder="Your Email" required>
             </div>
 
             <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" name="password" class="form-control" required>
+                <input type="password" name="password" placeholder="Password" class="form-control" required>
             </div>
             
-            <br>
-            <div class="form-btn">
-                <input type="submit" value="Login" name="login" class="btn btn-primary">
+            <div class="form-group">
+                <input type="submit" value="Login" name="login" class="btn btn-primary btn-lg">
             </div>
             
         </form>

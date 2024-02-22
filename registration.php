@@ -99,10 +99,10 @@
                 <input type="password" class="form-control" name="password" placeholder="Input Password: ">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" name="repeat_password" placeholder="Repeat Password: ">
+                <input type="password" class="form-control" name="repeat_password" placeholder="Confirm Password: ">
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" name="submit" value="Register" placeholder="submit">
+                <input type="submit" class="btn btn-primary btn-lg" name="submit" value="Register" placeholder="submit">
             </div>
         </form>
         <div><p>Already registered? <a href="login.php">Login Here</a></div>

@@ -6,10 +6,19 @@ body {
     padding: 0 1.45%;
 }
 
-.form-group{
-    margin-top: 5%;
-    margin-bottom: 30px;
+label {
+    margin-bottom: 2%;
 }
+.form-group {
+    margin-top: 5%;
+    margin-bottom: 1%;
+}
+
+/* Pinapalaki yung text sa textbox */
+.form-control {
+    font-size: 1.4rem;
+}
+/* Pinapalaki yung text sa textbox */
 
 /* SM LOGO CSS, it makes the logo small */
 #logo a {

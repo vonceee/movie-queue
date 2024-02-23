@@ -1,9 +1,14 @@
 <?php
   session_start();
-  $userId = $_SESSION["user"]["id"];
-  
+
   if(isset($_SESSION["user"])){
     header("Location: login.php");
+    $userId = $_SESSION["user"]["id"];
+    include 'database.php';
+    $sqlPrice = "SELECT price FROM tbl_cinema";
+    $result = mysqli_query($conn, $sqlPrice);
+    $row = mysqli_fetch_assoc($result);
+    $_SESSION["price"] = $row['price'];
 }
   
 
@@ -76,23 +81,21 @@
                     array_push($errors, "Please put money in the box");
                 }
                 // Fetch price from database
-                include 'database.php';
-                $sqlPrice = "SELECT price FROM tbl_cinema";
-                $result = mysqli_query($conn, $sqlPrice);
-                $row = mysqli_fetch_assoc($result);
-                $price = $row['price'];
+                
+                $price = $_SESSION["price"];
                 // Validate if payment amount is less than the price
                 if ($paymentMoney < $price) {
                     array_push($errors, "Insufficient Fund");
                 }
                 // If there are no errors, proceed with payment
                 if (empty($errors)) {
-                    // Insert payment record into payment_history table
-                    $sql = "INSERT INTO payment_history (user_id, amount) VALUES (?, ?)";
+                    // Insert payment record into tbl_online_transaction table
+                    $sql = "INSERT INTO tbl_online_transaction (user_id, amount) VALUES (?, ?)";
                     $stmt = mysqli_stmt_init($conn);
                     if (mysqli_stmt_prepare($stmt, $sql)) {
                         mysqli_stmt_bind_param($stmt, "ii", $userId, $paymentMoney);
                         mysqli_stmt_execute($stmt);
+                        header("Location: ticket.html");
                         echo "<div class='alert alert-success'>Payment recorded successfully!</div>";
 
                     include 'database.php';
@@ -115,12 +118,13 @@
           ?>  
 
           <h1 class="font-weight-light">Rewind.2023.1080p.WEBRip.DD5.1.x264-GalaxyRG</h1>
+          <?php                            
+              $price = $_SESSION["price"];
+              echo '<p class="lead text-muted">' . $price . '</p>';
+            ?>	
           <p class="lead text-muted">Insert Payment Below:</p>
-          <p>
 
-
-
-          <form action="transaction.php" method="post">
+          <form action="index.php" method="post">
             <div class="form-group"> 
               <input type="text" class="form-control-lg" name="paymentMoney" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>

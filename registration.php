@@ -58,7 +58,7 @@
                 array_push($errors, "Password does not match");
             }
             require_once "database.php";
-            $sql="SELECT * FROM user WHERE email='$email'";
+            $sql="SELECT * FROM tbl_customer WHERE email='$email'";
             $result=mysqli_query($conn, $sql);
             $rowCount=mysqli_num_rows($result);
             if ($rowCount>0) {
@@ -71,7 +71,7 @@
                     }
                 } else {
                     require_once "database.php";
-                    $sql="INSERT INTO user(lname, fname, email, password) values(?, ?, ?, ?)";
+                    $sql="INSERT INTO tbl_customer(customer_last_name, customer_first_name, email, password) values(?, ?, ?, ?)";
                     $stmt=mysqli_stmt_init($conn); //initializes a statement and returns an object suitable for mysqli_stmt_prepare()
                     $preparestmt=mysqli_stmt_prepare($stmt, $sql);
                     if ($preparestmt) {

@@ -10,7 +10,7 @@
         $email = $_POST["email"];
         $password = $_POST["password"];
         require_once "database.php";
-        $sql = "SELECT * FROM user WHERE email='$email'";
+        $sql = "SELECT * FROM tbl_customer WHERE email='$email'";
         $result = mysqli_query($conn, $sql);
         $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
         if ($user) {

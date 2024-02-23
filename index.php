@@ -1,14 +1,16 @@
 <?php
   session_start();
 
-  if(isset($_SESSION["user"])){
-    header("Location: login.php");
-    $userId = $_SESSION["user"]["id"];
-    include 'database.php';
+  include 'database.php';
     $sqlPrice = "SELECT price FROM tbl_cinema";
     $result = mysqli_query($conn, $sqlPrice);
     $row = mysqli_fetch_assoc($result);
     $_SESSION["price"] = $row['price'];
+
+  if(isset($_SESSION["user"])){
+    header("Location: login.php");
+    $userId = $_SESSION["user"]["id"];
+    
 }
   
 
@@ -118,20 +120,23 @@
           ?>  
 
           <h1 class="font-weight-light">Rewind.2023.1080p.WEBRip.DD5.1.x264-GalaxyRG</h1>
+          
           <?php                            
               $price = $_SESSION["price"];
-              echo '<p class="lead text-muted">' . $price . '</p>';
-            ?>	
-          <p class="lead text-muted">Insert Payment Below:</p>
-
-          <form action="index.php" method="post">
-            <div class="form-group"> 
-              <input type="text" class="form-control-lg" name="paymentMoney" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-            <div class="form-group">
-              <input type="submit" class="btn btn-primary my-3 btn-lg" name="transactPay" value="Pay Now!" placeholder="transactPay">
-            </div>
-          </form>
+              echo '<p class="lead text-muted">' . $price . '</p>';           
+              
+              if (isset($_SESSION['user'])) {
+                echo '<p class="lead text-muted">Insert Payment Below:</p>';                
+                echo '<form action="index.php" method="post">';
+                  echo '<div class="form-group"> ';
+                  echo '<input type="text" class="form-control-lg" name="paymentMoney" id="exampleFormControlTextarea1" rows="3"></textarea>';
+                echo '</div>';
+                echo '<div class="form-group">';
+                  echo '<input type="submit" class="btn btn-primary my-3 btn-lg" name="transactPay" value="Pay Now!" placeholder="transactPay">';
+                echo '</div>';
+                echo "</form>";
+              }
+          ?>	
             
           </p>
         </div>

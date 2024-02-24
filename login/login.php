@@ -2,14 +2,14 @@
     // Start the session
     session_start();
         if(isset($_SESSION["user"])){
-            header("Location: index.php");
+            header("Location: ../index.php");
         }
 
     // Check if the login form is submitted
     if(isset($_POST["login"])){
         $email = $_POST["email"];
         $password = $_POST["password"];
-        require_once "database.php";
+        require_once "../database.php";
         $sql = "SELECT * FROM tbl_customer WHERE email='$email'";
         $result = mysqli_query($conn, $sql);
         $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
@@ -18,7 +18,7 @@
                 // Sets the user session
                 $_SESSION["user"] = $user;
                 // Redirect to the game.php page
-                header("Location: index.php");
+                header("Location: ../payment/payment.php");
                 exit(); // Stop script execution after redirect
             } else {
                 // Password does not match
@@ -80,7 +80,7 @@
             </div>
             
         </form>
-        <div><p>Not Registered yet? <a href="registration.php">Register Here</a></div>
+        <div><p>Not Registered yet? <a href="../registration/registration.php">Register Here</a></div>
     </div>
 
 </body>

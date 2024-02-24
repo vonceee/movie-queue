@@ -1,11 +1,11 @@
 <?php
     session_start();
     if(!isset($_SESSION["user"])){
-        header("Location: login.php");
+        header("Location: ../login/login.php");
     }
 
     // Include the database connection file
-    include 'database.php';
+    include '../database.php';
 
     // Assuming the user's ID is stored in the session
     $userID = $_SESSION["user"];
@@ -65,7 +65,7 @@
                         ?>
                     </tbody>
                 </table>
-                <a href="logout.php" class="btn btn-warning">Logout</a>
+                <a href="../logout.php" class="btn btn-warning">Logout</a>
             </div>
         </body>
         </html>

@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(isset($_SESSION["user"])){
-        header("Location: index.php");
+        header("Location: ../index.php");
     }
 ?>
 
@@ -57,7 +57,7 @@
             if($password!= $RepeatPassword) {
                 array_push($errors, "Password does not match");
             }
-            require_once "database.php";
+            require_once "../database.php";
             $sql="SELECT * FROM tbl_customer WHERE email='$email'";
             $result=mysqli_query($conn, $sql);
             $rowCount=mysqli_num_rows($result);
@@ -70,14 +70,14 @@
                     echo"<div class='alert alert-danger'>$error</div>";
                     }
                 } else {
-                    require_once "database.php";
+                    require_once "../database.php";
                     $sql="INSERT INTO tbl_customer(customer_last_name, customer_first_name, email, password) values(?, ?, ?, ?)";
                     $stmt=mysqli_stmt_init($conn); //initializes a statement and returns an object suitable for mysqli_stmt_prepare()
                     $preparestmt=mysqli_stmt_prepare($stmt, $sql);
                     if ($preparestmt) {
                         mysqli_stmt_bind_param($stmt, "ssss", $LastName, $FirstName, $email, $passwordHash);
                         mysqli_stmt_execute($stmt);
-                        echo "<div class='alert alert-success'> You are Registered Successfully! </div>";
+                        echo "<div class='alert alert-success'> You are Registered Successfully! </div>";                        
                     } else {
                         die("Something went wrong");
                     }
@@ -105,7 +105,7 @@
                 <input type="submit" class="btn btn-primary btn-lg" name="submit" value="Register" placeholder="submit">
             </div>
         </form>
-        <div><p>Already registered? <a href="login.php">Login Here</a></div>
+        <div><p>Already registered? <a href="../login/login.php">Login Here</a></div>
     </div>
 
 </body>

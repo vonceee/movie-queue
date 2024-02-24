@@ -2,19 +2,15 @@
   session_start();
 
   include 'database.php';
-    $sqlPrice = "SELECT price FROM tbl_cinema";
+    $sqlPrice = "SELECT price FROM tbl_cinema1";
     $result = mysqli_query($conn, $sqlPrice);
     $row = mysqli_fetch_assoc($result);
     $_SESSION["price"] = $row['price'];
 
   if(isset($_SESSION["user"])){
-    header("Location: login.php");
     $userId = $_SESSION["user"]["id"];
     
-}
-  
-
-?>
+}?>
 
 
 
@@ -31,23 +27,21 @@
 
   <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/album/">
 
-
-
   <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="transaction.css">
-  <style>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="cinema-seat.css">
 
-  </style>
-
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery library -->
 
 </head>
 
 <body>
-
-
   <header>
     <div class="navbar navbar-light bg-light shadow-sm">
       <div class="container">
@@ -122,23 +116,67 @@
           <h1 class="font-weight-light">Rewind.2023.1080p.WEBRip.DD5.1.x264-GalaxyRG</h1>
           
           <?php                            
+              // To Use Next Time
               $price = $_SESSION["price"];
               echo '<p class="lead text-muted">' . $price . '</p>';           
               
-              if (isset($_SESSION['user'])) {
-                echo '<p class="lead text-muted">Insert Payment Below:</p>';                
-                echo '<form action="index.php" method="post">';
-                  echo '<div class="form-group"> ';
-                  echo '<input type="text" class="form-control-lg" name="paymentMoney" id="exampleFormControlTextarea1" rows="3"></textarea>';
-                echo '</div>';
-                echo '<div class="form-group">';
-                  echo '<input type="submit" class="btn btn-primary my-3 btn-lg" name="transactPay" value="Pay Now!" placeholder="transactPay">';
-                echo '</div>';
-                echo "</form>";
-              }
-          ?>	
-            
-          </p>
+              // if (isset($_SESSION['user'])) {
+              //   echo '<p class="lead text-muted">Insert Payment Below:</p>';                
+              //   echo '<form action="index.php" method="post">';
+              //     echo '<div class="form-group"> ';
+              //     echo '<input type="text" class="form-control-lg" name="paymentMoney" id="exampleFormControlTextarea1" rows="3"></textarea>';
+              //   echo '</div>';
+              //   echo '<div class="form-group">';
+              //     echo '<input type="submit" class="btn btn-primary my-3 btn-lg" name="transactPay" value="Pay Now!" placeholder="transactPay">';
+              //   echo '</div>';
+              //   echo "</form>";
+              // }
+          ?>
+          <div class="container mt-3 mx-auto">
+            <div class="row seats">
+              <!-- Cinema seat buttons -->
+              <button id="1" class="cinema-seat m-1"></button>
+              <button id="2" class="cinema-seat m-1"></button>
+              <button id="3" class="cinema-seat m-1"></button>
+              <button id="4" class="cinema-seat m-1"></button>
+              <button id="5" class="cinema-seat m-1"></button>
+            </div>
+            <div class="row seats">
+              <button id="6" class="cinema-seat m-1"></button>
+              <button id="7" class="cinema-seat m-1"></button>
+              <button id="8" class="cinema-seat m-1"></button>
+              <button id="9" class="cinema-seat m-1"></button>
+              <button id="10" class="cinema-seat m-1"></button>
+            </div>
+            <!-- More rows of seats can be added here -->
+          </div>
+          
+          <!-- Button to trigger modal -->
+          <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#exampleModal">
+            Confirm
+          </button>
+
+          <!-- Modal -->
+          <div class="modal" id="exampleModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Save Changes</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Sign in to proceed to payment.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -154,6 +192,8 @@
           href="/docs/5.0/getting-started/introduction/">to read more</a>.</p>
     </div>
   </footer>
-
+  
+<!-- JavaScript -->
+<script src="index.js"></script>
 </body>
 </html>

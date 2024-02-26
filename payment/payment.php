@@ -176,9 +176,11 @@
             console.log(<?php echo $_SESSION['cinema-seat']?>);
             var test = JSON.stringify(<?php echo $_SESSION['cinema-seat']?>);
             console.log(test);
-            insertSeatToDatabase(test);
             // Insert seat values into the database
+            insertSeatToDatabase(test);
             
+            // Clear the selectedButtonIds from localStorage after processing
+            localStorage.setItem('selectedButtonIds', JSON.stringify([]));
 
             // Log "test" to the console when the button is clicked
 

@@ -47,9 +47,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- bootstrap navbar/header -->
 
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- JQuery -->
+
     <link rel="stylesheet" href="payment.css">
 </head>
 <body>
+        
     
 <!-- Image and text -->
     <nav class="navbar navbar-light bg-light">
@@ -103,7 +108,7 @@
                         mysqli_stmt_close($stmt_transaction); // Close the statement after execution
                 
                         // Redirect to ticket.html after successful payment
-                        header("Location: ../ticket.html");
+                        //header("Location: ../ticket.html");
                         exit; // Terminate script execution after redirection
                     } else {
                         die("Error: Unable to prepare statement for tbl_transaction");
@@ -120,25 +125,74 @@
             }
             mysqli_close($conn); // Close database connection
         }                        
-    ?>  
+    ?>      
+        
+    <?php echo '<p class="text-success">Your chosen seat ID is: <mark>' . $seatValues . ' </mark>'; ?>
+    <p class="lead text-muted">Insert Payment Below:</p>                
+    <form action="payment.php" method="post">
+    <div class="form-group"> 
+    <input type="text" class="form-control-lg" name="paymentMoney" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>        
+    <div class="form-group">
+    <input type="submit" class="btn btn-primary my-3 btn-lg" name="transactPay" value="Pay Now!" placeholder="transactPay">
+    </div>
+    </form>
+        
+           
+    
 
-    <!-- Kahit hindi na php yung mga ito sa totoo lang, nakakatamad lang ibalik -->
-    <?php
-        if (isset($_SESSION['user'])) {
-            echo '<p class="text-success">Your chosen seat ID is: <mark>' . $seatValues . ' </mark>';
-            echo '<p class="lead text-muted">Insert Payment Below:</p>';                
-            echo '<form action="./payment.php" method="post">';
-            echo '<div class="form-group"> ';
-            echo '<input type="text" class="form-control-lg" name="paymentMoney" id="exampleFormControlTextarea1" rows="3"></textarea>';
-            echo '</div>';
-            echo '<div class="form-group">';
-            echo '<input type="submit" class="btn btn-primary my-3 btn-lg" name="transactPay" value="Pay Now!" placeholder="transactPay">';
-            echo '</div>';
-            echo "</form>";
-                }
-    ?>
+
 
     </div>
+
+    <!-- JavaScript To Insert To Data Base -->
+   <!-- JavaScript To Insert To Data Base -->
+
+    <script>
+        // Function to insert seat value into the database via AJAX
+        function insertSeatToDatabase(seatValue) {
+            $.ajax({
+                url: '../insert-seat.php',
+                type: 'POST',
+                data: { seatValue: seatValue },
+                success: function(response) {
+                    console.log(response); // Log success response
+                },
+                error: function(xhr, status, error) {
+                    console.error(error); // Log error message
+                }
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+        // Retrieve the form element
+        const paymentForm = document.querySelector('form');
+
+        // Add a submit event listener to the form
+        paymentForm.addEventListener('submit', function(event) {
+            // Prevent the default form submission behavior
+            event.preventDefault();        -            
+            
+            console.log(<?php echo $_SESSION['cinema-seat']?>);
+            var test = JSON.stringify(<?php echo $_SESSION['cinema-seat']?>);
+            console.log(test);
+            insertSeatToDatabase(test);
+            // Insert seat values into the database
+            
+
+            // Log "test" to the console when the button is clicked
+
+            // Retrieve the cinema seat value from the PHP session
+            // Insert your code here to retrieve and handle the cinema seat value
+            
+            // Optionally, you can submit the form programmatically if needed
+            // paymentForm.submit();
+        });
+    });
+
+
+
+</script>
 
 </body>
 </html>

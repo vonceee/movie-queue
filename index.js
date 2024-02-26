@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     cinemaButtons.forEach(function(button) {
         // Retrieve seat designation from button ID
         var seatDesignation = button.id;
-
+    
         // Make AJAX request to retrieve availability status
         $.ajax({
             url: 'retrieve-seat.php',
@@ -39,23 +39,22 @@ document.addEventListener('DOMContentLoaded', function() {
             dataType: 'json',
             data: { seatDesignation: seatDesignation },
             success: function(response) {
-                // Check if availability status is 0      
-                //  Unsure if != selectedButtonId is needed
-                selectedButtonIds.forEach(function(buttonId) {
-
-                    if (response.available === 0) {
-                        // Disable the button
-                        button.disabled = true;
-
-                        // If the cinema seat is selected, removes the 'selected' class so the css for disable to take effect 
-                        button.classList.remove('selected')
-                    }
-                })
+                // Check if availability status is 0
+                if (response.available === 0) {
+                    
+                    // Disable the button
+                    button.disabled = true;
+    
+                    // If the cinema seat is selected, removes the 'selected' class so the css for disable to take effect 
+                    button.classList.remove('selected');
+                }
             },
             error: function(xhr, status, error) {
                 console.error('AJAX Error:', error);
             }
         });
+ 
+    
 
         // Cinema Seat Buttons
         button.addEventListener('click', function() {                        
@@ -78,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Save the updated array of selected button IDs in localStorage
                 localStorage.setItem('selectedButtonIds', JSON.stringify(selectedButtonIds));
-            } else {
+            } else {                
                 // If the button is not active, activate it
                 button.classList.add('selected');
                 
@@ -91,6 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     selectedButtonIds.push(selectedButtonId);
                     console.log(selectedButtonIds);
                     
+                    
                     // Save the updated array of selected button IDs in localStorage
                     localStorage.setItem('selectedButtonIds', JSON.stringify(selectedButtonIds));
                 }
@@ -102,7 +102,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
      // Add click event listener to the "Save changes" button
      saveChangesBtn.addEventListener('click', function() {
-        var jsVariable = storedButtonIds;        
+        var passCinemaSeatToPHP = localStorage.getItem('selectedButtonIds');
+        var jsVariable = passCinemaSeatToPHP;        
 
         // AJAX request to send the variable to PHP
         $.ajax({
@@ -110,15 +111,11 @@ document.addEventListener('DOMContentLoaded', function() {
             type: 'POST',
             data: { jsVariable: jsVariable },
             success: function(response) {
-                console.log(response); // Handle success response
+                console.log(response); // Handle success response                                                
+                // Deletes content of localStorage safely, no error if deletion
+                // localStorage.setItem('selectedButtonIds', JSON.stringify([]));                                     
+                window.location.href = './login/login.php';
                 
-                insertSeatToDatabase(jsVariable);
-                
-                // Deletes localStorage 
-                localStorage.setItem('selectedButtonIds', JSON.stringify([]));
-                 
-                    
-                //window.location.href = './login/login.php';
             },
             error: function(xhr, status, error) {
                 console.error(error); // Handle errors
@@ -129,17 +126,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
-
-function insertSeatToDatabase(seatValue) {
-    $.ajax({
-        url: 'insert-seat.php',
-        type: 'POST',
-        data: { seatValue: seatValue },
-        success: function(response) {
-            console.log(response);
-        },
-        error: function(xhr, status, error) {
-            console.error(error);
-        }
-    });
-}

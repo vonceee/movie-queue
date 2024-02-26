@@ -17,8 +17,9 @@
             if (password_verify($password, $user["password"])) {
                 // Sets the user session
                 $_SESSION["user"] = $user;
-                // Redirect to the game.php page
-                header("Location: ../payment/payment.php");
+                // Redirect to the payment.php page
+                header("Location: ../payment/payment.php");                
+
                 exit(); // Stop script execution after redirect
             } else {
                 // Password does not match

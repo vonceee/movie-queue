@@ -46,11 +46,18 @@
   justify-content: center;
 }
 
+/* Original background-color is dimgrey */
 *:disabled {
-  background-color: dimgrey;
+  background-color: red;
   color: linen;
   opacity: 1;
   cursor: not-allowed; /* Change cursor to not-allowed */
   pointer-events: none; 
   border-color: #ccc; /* Change border color to gray */
+}
+
+.selected {
+  background-color: dimgray;
+  border: 2px solid blue;
+  
 }

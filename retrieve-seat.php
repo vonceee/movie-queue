@@ -11,7 +11,7 @@ if(isset($_GET['seatDesignation'])) {
     $seatDesignation = $_GET['seatDesignation'];
 
     // Prepare and execute SQL query to retrieve availability status
-    $sql = "SELECT available FROM tbl_seats WHERE seat_designation = ?";
+    $sql = "SELECT available FROM tbl_seats WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $seatDesignation);
     $stmt->execute();

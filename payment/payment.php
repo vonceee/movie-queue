@@ -11,7 +11,28 @@
         $userId = $_SESSION["user"]["id"];
     }    
 
-    $seatID =  $_SESSION['cinema-seat']
+    //This part is responsible for displaying the contents of the array and not the whole array 
+    // Check if the session variable is set
+    if (isset($_SESSION['cinema-seat'])) {
+        // Decode the JSON string into a PHP array
+        $cinemaSeatArray = json_decode($_SESSION['cinema-seat']);
+
+        // Check if decoding was successful
+        if ($cinemaSeatArray !== null) {
+            // Initialize an empty string to store the values
+            $seatValues = "";
+
+            // Loop through the array and concatenate the values
+            foreach ($cinemaSeatArray as $value) {
+                $seatValues .= $value . ", ";
+            }
+
+            // Remove the trailing comma and space
+            $seatValues = rtrim($seatValues, ", ");
+        }
+    }
+    //This part is responsible for displaying the contents of the array and not the whole array 
+
 ?>
 
 <!DOCTYPE html>
@@ -104,7 +125,7 @@
     <!-- Kahit hindi na php yung mga ito sa totoo lang, nakakatamad lang ibalik -->
     <?php
         if (isset($_SESSION['user'])) {
-            echo '<p class="text-success">Your chosen seat ID is: <mark>' . $_SESSION['cinema-seat'] . ' </mark>';
+            echo '<p class="text-success">Your chosen seat ID is: <mark>' . $seatValues . ' </mark>';
             echo '<p class="lead text-muted">Insert Payment Below:</p>';                
             echo '<form action="./payment.php" method="post">';
             echo '<div class="form-group"> ';
